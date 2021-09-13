@@ -1,0 +1,16 @@
+{
+  "name": "SportsDatabase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "basketball.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-sema": "^3.1.0",
+    "mathjs": "^9.4.4"
+  }
+}

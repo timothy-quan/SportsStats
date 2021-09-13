@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Sports Database</title>
+
+        <link rel="stylesheet" href="sportsstats.css" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Libre Baskerville' rel='stylesheet'>
+
+    </head>
+    <body>
+        <header>
+
+        </header>
+
+        <nav>
+            <a class="navigation basketball" href="basketball.html">Basektball</a>
+            <a class="navigation football" href="football.html">Football</a>
+            <a class="navigation hockey" href="hockey.html">Hockey</a>
+            <a class="navigation soccer" href="soccer.html">Soccer</a>
+        </nav>
+
+        <aside class="">
+
+            <select id="categories" name="categories" multiple="9" size="9">
+                <option value="points">Points</option>
+                <option value="assists">Assists</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="threePointers">3PM</option>
+                <option value="blocks">Blocks</option>
+                <option value="steals">Steals</option>
+                <option value="fgPercent">Field Goal %</option>
+                <option value="ftPercent">Free Throw %</option>
+                <option value="turnovers">Turnovers</option>
+            </select>
+
+            <select id="years" name="years"></select>
+
+            <br>
+            <input type="button" id="search" name="search" value="Search">
+
+        </aside>
+
+        <main>
+            <div id="loading">Loading...</div>
+
+            <table id="players"></table>
+        </main>
+
+        <footer>
+        </footer>
+
+        <script src="dist/bundle.js"></script>
+
+    </body>
+</html>

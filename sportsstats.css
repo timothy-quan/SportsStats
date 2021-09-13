@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* CSS Document */
+
+    body, html {
+        width: 100%;
+        margin: 0;
+        font-family: 'Libre Baskerville', sans-serif;
+		font-size: 17px;
+        padding: 0px;
+        overflow-x: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    header {
+        height: 230px;
+        background-position: 0px -120px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-top: 1px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 180px;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    .navigation {
+        width: 25%;
+        display: inline-block;
+        box-sizing: border-box;
+        height: 110px;
+        color: white;
+        font-size: 1.2em;
+        font-style: normal;
+        font-family: 'Julius Sans One', sans-serif;
+        text-decoration: none;
+        text-transform: uppercase;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 110px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .basketball { background-image: url("images/basketball.jpg"); }
+    .football { background-image: url("images/football.jpg"); }
+    .hockey { background-image: url("images/hockey.jpg"); }
+    .soccer { background-image: url("images/soccer.jpg"); }
+
+    .basketball:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/basketball.jpg"); }
+    .football:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/football.jpg"); }
+    .hockey:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/hockey.jpg"); }
+    .soccer:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/soccer.jpg"); }
+
+    aside {
+        text-align: center;
+    }
+
+    #loading {
+        display: none;
+    }
+
+    #players {
+        font-size: 0.75em;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #players tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #players th, td {
+        text-align: center;
+        padding: 0.5em 0.75em 0.5em 0.75em;
+    }
+
+    #players td:nth-child(2) {
+        text-align: left;
+        padding-right: 0.25em;
+    }
+
+    #players td:nth-child(n+2):nth-child(-n+4){
+        border-left: #d3d3d3 solid 0.05em;
+        border-right: #d3d3d3 solid 0.05em;
+    }
+
+    #players td:nth-child(20) {
+        font-weight: bold;
+        border-left: #d3d3d3 solid 0.05em;
+    }
+
+    #players th {
+        background-color: #ffa500;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    footer {
+        height: 7em;;
+    }
