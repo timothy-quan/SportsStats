@@ -541,6 +541,11 @@ let tab =
      currentYear--;
  }
 
+let controller = new AbortController();
+let signal = controller.signal;
+let search;
+let timer;
+
 function resetTable() {
 tab =
     `<tr>
@@ -568,7 +573,7 @@ tab =
 }
 
 async function getTotalPages(playersUrl) {
-    let response = await fetch(playersUrl);
+    let response = await fetch(playersUrl, {signal});
     var stats = await response.json();
     return JSON.parse(stats.meta.total_pages);
 }
@@ -579,7 +584,7 @@ async function getApi(playersUrl) {
     let players = [];
     for (var i = 1; i <= pages; i++) {
         var modifiedUrl = playersUrl + "&page=" + i;
-        let response = await fetch(modifiedUrl);
+        let response = await fetch(modifiedUrl, {signal});
         var stats = await response.json();
         getPlayers(stats, players);
         await limit();
@@ -594,6 +599,8 @@ function getPlayers(stats, players) {
 }
 
 async function getAveragesApi(playersUrl, averagesUrl) {
+    hideSearchReset();
+    showLoader();
     let players = await getApi(playersUrl);
     const numOfPlayers = players.length;
     const limit = RateLimit(1);
@@ -609,7 +616,7 @@ async function getAveragesApi(playersUrl, averagesUrl) {
                 break;
             }
         }
-        let response = await fetch(modifiedUrl);
+        let response = await fetch(modifiedUrl, {signal});
         var stats = await response.json();
         console.log(stats);
         for (let s of stats.data) {
@@ -638,12 +645,14 @@ async function getAveragesApi(playersUrl, averagesUrl) {
     }
     removePlayers(players);
     createFgFtWeighting(players);
-    hideloader();
     console.log(players);
     createRating(players);
     replaceNull(players);
     sortByRating(players);
-    return players;
+    hideLoader();
+    stopMusic();
+    showTable();
+    showSearchReset();
 }
 
 function removePlayers(players) {
@@ -751,18 +760,79 @@ function sortByRating(players) {
     document.getElementById("players").innerHTML = tab;
 }
 
-function showloader() {
+function showLoader() {
     document.getElementById("loading").style.display = "inline-block";
 }
 
-function hideloader() {
+function hideLoader() {
     document.getElementById("loading").style.display = "none";
 }
 
+function hideTable() {
+    document.getElementById("players").style.display = "none";
+}
+
+function showTable() {
+    document.getElementById("players").style.display = "table";
+}
+
+function hideSearchReset() {
+    document.getElementById("search").style.display = "none";
+    document.getElementById("reset").style.display = "none";
+    document.getElementById("dunkanimation").style.display = "inline-block";
+}
+
+function showSearchReset() {
+    document.getElementById("search").style.display = "inline-block";
+    document.getElementById("reset").style.display = "inline-block";
+    document.getElementById("dunkanimation").style.display = "none";
+}
+
+function playMusic() {
+    document.getElementById("loadingmusic").play();
+}
+
+function stopMusic() {
+    document.getElementById("loadingmusic").pause();
+}
+
+function resetSearch() {
+    controller.abort();
+    controller = new AbortController();
+    signal = controller.signal;
+    hideLoader();
+    stopMusic();
+    document.getElementById("categories").selectedIndex = -1;
+    document.getElementById("years").selectedIndex = 0;
+}
+
+function countdownTimer() {
+    var remainingTime = 5;
+    timer = setInterval(function(){
+        document.getElementById("timer").style.display = "inline-block";
+        if(remainingTime <= 0){
+            document.getElementById("timer").style.display = "none";
+            clearInterval(timer);
+        } else {
+            document.getElementById("timer").innerHTML = remainingTime;
+        }
+        remainingTime -= 1;
+    }, 1000);
+}
+
 document.getElementById("search").onclick = function () {
-    showloader();
+    hideTable();
+    playMusic();
     resetTable();
-    let players = getAveragesApi(api_url_players, api_url_averages);
+    setTimeout(function(){ countdownTimer() }, 0000);
+    search = setTimeout(function(){ getAveragesApi(api_url_players, api_url_averages) }, 6000);
+};
+
+document.getElementById("reset").onclick = function () {
+    clearTimeout(search);
+    document.getElementById("timer").style.display = "none";
+    clearInterval(timer);
+    resetSearch();
 };
 
 },{"async-sema":21,"mathjs":869}],4:[function(require,module,exports){
