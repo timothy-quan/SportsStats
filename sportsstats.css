@@ -12,18 +12,7 @@
         background-repeat: no-repeat;
     }
 
-    header {
-        height: 230px;
-        background-position: 0px -120px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        padding-top: 1px;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 180px;
-    }
-
-    nav {
+    #sportsnav {
         display: flex;
     }
 
@@ -51,23 +40,82 @@
     .hockey { background-image: url("images/hockey.jpg"); }
     .soccer { background-image: url("images/soccer.jpg"); }
 
-    .basketball:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/basketball.jpg"); }
-    .football:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/football.jpg"); }
-    .hockey:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/hockey.jpg"); }
-    .soccer:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/soccer.jpg"); }
+    .basketball:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/basketball.jpg"); color: white;}
+    .football:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/football.jpg"); color: white;}
+    .hockey:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/hockey.jpg"); color: white;}
+    .soccer:hover { background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/soccer.jpg"); color: white;}
 
     aside {
         text-align: center;
+        padding-top: 2em;
+        padding-bottom: 2em;
+        vertical-align: top;
+        color: white;
     }
 
-    #loading {
+    aside label {
+        font-size: 1.2em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        margin-left: 2em;
+        margin-right: 2em;
+        color: white;
+    }
+
+    aside select {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 3.5em;
+        margin-right: 3.5em;
+    }
+
+    aside input {
+        margin-left: 6em;
+        margin-right: 6em;
+    }
+
+    aside select option, aside input {
+        font-size: 0.9em;
+    }
+
+    #dunkanimation {
+        display: none;
+        width: 7em;
+    }
+
+    #basketballselections {
+        background-color: #ffc535;
+    }
+
+    main {
+        postion: relative;
+        margin-bottom: 5em;
+    }
+
+    #loadingdiv {
+        position: absolute;
+        margin-top: 2em;
+        left: 47%;
+    }
+
+    #timerdiv {
+        position: absolute;
+        margin-top: 2em;
+        left: 50%;
+    }
+
+    #loading, #timer {
         display: none;
     }
 
     #players {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5em;
         font-size: 0.75em;
         border-collapse: collapse;
-        width: 100%;
+        width: 90%;
+        border: #d3d3d3 solid 0.05em;
     }
 
     #players tr:nth-child(even) {
@@ -100,6 +148,6 @@
         text-transform: uppercase;
     }
 
-    footer {
-        height: 7em;;
+    audio {
+        display: none;
     }
