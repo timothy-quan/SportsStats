@@ -300,6 +300,7 @@ function resetSearch() {
     signal = controller.signal;
     hideLoader();
     stopMusic();
+    hideTable();
     document.getElementById("categories").selectedIndex = -1;
     document.getElementById("years").selectedIndex = 0;
 }
