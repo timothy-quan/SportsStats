@@ -2,7 +2,6 @@
 /* CSS Document */
 
     body, html {
-        width: 100%;
         margin: 0;
         font-family: 'Libre Baskerville', sans-serif;
 		font-size: 17px;
@@ -10,6 +9,8 @@
         overflow-x: hidden;
         background-size: cover;
         background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
     }
 
     #sportsnav {
@@ -150,4 +151,31 @@
 
     audio {
         display: none;
+    }
+
+    #indexbody {
+        overflow: hidden;
+    }
+
+    #homepagebg {
+        animation: bgTransition 20s infinite;
+        height: 29em;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #headings {
+        text-align: center;
+    }
+
+    @keyframes bgTransition {
+        0%,100%  {background-image: url("images/basketballcourt.jpg");}
+        25% {background-image: url("images/footballfield.jpg");}
+        50% {background-image: url("images/hockeyrink.jpg");}
+        75% {background-image: url("images/soccerfield.jpg");}
     }
