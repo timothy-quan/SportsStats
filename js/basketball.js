@@ -319,12 +319,33 @@ function countdownTimer() {
     }, 1000);
 }
 
+var validate = function () {
+
+    var usrInput = document.getElementById("categories").value;
+    var errMsg = document.getElementById("alertPlaceholder");
+    var isValid = true;
+
+    if (usrInput == "") {
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = '<div class="alert alert-danger alert-trim" role="alert">' +
+                            '<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>' +
+                            '<div>' + "No categories selected!" + '</div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+        alertPlaceholder.append(wrapper);
+        isValid = false;
+    }
+
+    return isValid;
+
+};
+
 document.getElementById("search").onclick = function () {
-    hideTable();
-    playMusic();
-    resetTable();
-    setTimeout(function(){ countdownTimer() }, 0000);
-    search = setTimeout(function(){ getAveragesApi(api_url_players, api_url_averages) }, 6000);
+    if (validate()) {
+        hideTable();
+        playMusic();
+        resetTable();
+        setTimeout(function(){ countdownTimer() }, 0000);
+        search = setTimeout(function(){ getAveragesApi(api_url_players, api_url_averages) }, 6000);
+    }
 };
 
 document.getElementById("reset").onclick = function () {
