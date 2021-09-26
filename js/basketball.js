@@ -28,6 +28,7 @@ let tab =
       <th>Rating</th>
      </tr>`;
 
+// Creates drop-down menu of NBA seasons
  let years = document.getElementById("years");
  let currentYear = new Date().getFullYear();
  let firstYear = 1983;
@@ -44,6 +45,7 @@ let signal = controller.signal;
 let search;
 let timer;
 
+// Removes all players from the table
 function resetTable() {
 tab =
     `<tr>
@@ -70,12 +72,14 @@ tab =
      </tr>`;
 }
 
+// Return number of pages from players endpoint, gets total number of players
 async function getTotalPages(playersUrl) {
     let response = await fetch(playersUrl, {signal});
     var stats = await response.json();
     return JSON.parse(stats.meta.total_pages);
 }
 
+// Returns all players from the API in an array
 async function getApi(playersUrl) {
     let pages = await getTotalPages(playersUrl);
     const limit = RateLimit(1);
@@ -90,12 +94,14 @@ async function getApi(playersUrl) {
     return players;
 }
 
+// Gets the player ID, full name, position and team of each player
 function getPlayers(stats, players) {
     for (let r of stats.data) {
         players.push({id:r.id, firstName:r.first_name, lastName:r.last_name, position:r.position, team:r.team.abbreviation});
     }
 }
 
+// Returns stats for each player based on the chosen season
 async function getAveragesApi(playersUrl, averagesUrl) {
     hideSearchReset();
     showLoader();
@@ -153,6 +159,7 @@ async function getAveragesApi(playersUrl, averagesUrl) {
     showSearchReset();
 }
 
+// Removes players that have no games played during the chosen season
 function removePlayers(players) {
     for (var i = 0; i < players.length; i++) {
         if (players[i].gamesPlayed === undefined) {
@@ -162,6 +169,7 @@ function removePlayers(players) {
     }
 }
 
+// Creates a fg% and ft% weighting based on the number of free throws and field goals attempted
 function createFgFtWeighting(players) {
     let fgPercentages = players.map(a => a.fgPercent);
     let ftPercentages = players.map(a => a.ftPercent);
@@ -175,6 +183,7 @@ function createFgFtWeighting(players) {
     }
 }
 
+// Create overall Z-score rating for each player by adding up the Z-scores for each chosen category
 function createRating(players) {
     let selected = [];
     for (var option of document.getElementById("categories").options) {
@@ -215,6 +224,7 @@ function createRating(players) {
     }
 }
 
+// Replace null properties with N/A for table view
 function replaceNull(players) {
     for (let r of players) {
         for (var category in r) {
@@ -225,6 +235,7 @@ function replaceNull(players) {
     }
 }
 
+// Sorts players by their overall Z-score rating and creates ranking table
 function sortByRating(players) {
     players.sort(function(a, b){return b.rating - a.rating});
     let rank = 1;
@@ -258,6 +269,7 @@ function sortByRating(players) {
     document.getElementById("players").innerHTML = tab;
 }
 
+// The showLoader() function to the stopMusic() function are functions that show or hide certain features during loading of stats
 function showLoader() {
     document.getElementById("loading").style.display = "inline-block";
 }
@@ -294,6 +306,7 @@ function stopMusic() {
     document.getElementById("loadingmusic").pause();
 }
 
+// Aborts the current API request and resets user inputs
 function resetSearch() {
     controller.abort();
     controller = new AbortController();
@@ -305,6 +318,7 @@ function resetSearch() {
     document.getElementById("years").selectedIndex = 0;
 }
 
+// Creates a countdown timer so that users can abort the search before the API request is actually sent (loading stats takes some time)
 function countdownTimer() {
     var remainingTime = 5;
     timer = setInterval(function(){
@@ -319,8 +333,8 @@ function countdownTimer() {
     }, 1000);
 }
 
+// Validates that at least a single category is selected
 var validate = function () {
-
     var usrInput = document.getElementById("categories").value;
     var errMsg = document.getElementById("alertPlaceholder");
     var isValid = true;
