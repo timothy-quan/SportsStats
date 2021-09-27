@@ -92,7 +92,7 @@
         background-color: #ffc535;
     }
 
-    main {
+    #basketballmain {
         postion: relative;
         margin-bottom: 5em;
     }
@@ -157,9 +157,36 @@
         display: none;
     }
 
+    #homemain {
+        display: flex;
+        flex-flow: column;
+        height: 75%;
+    }
+
+    /* For devices 1080px and larger: */
+    @media only screen and (min-device-width: 1920px) {
+        #homemain {
+            height: 85%;
+        }
+
+        #homepagebg {
+            background-position: 25% 100%;
+        }
+    }
+
+    @media only screen and (min-device-width: 2560px) {
+        #homemain {
+            height: 89%;
+        }
+
+        #homepagebg {
+            background-position: 25% 100%;
+        }
+    }
+
     #homepagebg {
         animation: bgTransition 20s infinite;
-        height: 29em;
+        flex: 1 1 auto;
         width: 100%;
         background-size: cover;
         background-repeat: no-repeat;
